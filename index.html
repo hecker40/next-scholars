@@ -1,36 +1,418 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Next Scholars</title>
-    <link href="style.css" rel="stylesheet" type="text/css"/>
-    <link rel="icon" href="anchor.svg"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <nav class="flex space-between navbar" id="navbar">
-      <div class="flex gap-8">
-        <a class="flex gap-8 title" href="/">
-          <!-- <img src="https://raw.githubusercontent.com/hecker40/enavant/refs/heads/main/enavant-logo.png" width="40px" height="40" style="object-fit:contain"> -->
-          <h6>Next Scholars</h6>
-        </a>
-      </div>
-      <div class="flex gap-128">
-        <div class="flex gap-32">
-          <a href="/#about">About</a>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2wuX3B9NHZsYZVquEYNS2gVA5kiP22qFeOoFz6KsiT3tRcw/viewform?usp=sf_link">Enroll</a>
-          <a href="/tutors">Tutors</a>
-        </div>
-      </div>
-      <div class="flex gap-16">
-        <a href="/login"><button class="secondary">Donate</button></a>
-        <a onclick="nav();" class="bar">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-list" viewBox="0 0 16 16" class="bar"><path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/></svg>
-        </a>
-      </div>
-    </nav>
-    <script src="script.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  </body>
+    <title>NextScholars | Education as a Right</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for high-quality SVG icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        /* Custom Font Family (Inter is clean and highly readable) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Dark Gray/Black for main background */
+            color: #E5E7EB; /* Light text for contrast */
+            overflow-x: hidden;
+        }
+
+        /* Gradient for text and borders */
+        .text-gradient {
+            background-image: linear-gradient(to right, #A78BFA, #D946EF); /* Indigo to Fuchsia */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .border-gradient {
+            background: linear-gradient(to right, #A78BFA, #D946EF);
+            /* This is a common trick for border gradients */
+            border-image: linear-gradient(to right, #A78BFA, #D946EF) 1;
+            border-style: solid;
+        }
+
+        /* Button hover effect for the vibrant look */
+        .btn-vibrant {
+            background-image: linear-gradient(to right, #8B5CF6, #EC4899); /* Deep Purple to Pink */
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        .btn-vibrant:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(236, 72, 153, 0.6);
+        }
+
+        /* Floating background elements for a subtle, dynamic feel */
+        .bg-float {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgba(139, 92, 246, 0.15); /* Light Purple transparent */
+            filter: blur(80px);
+            animation: float-element 25s infinite ease-in-out;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-float:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .bg-float:nth-child(2) { bottom: 20%; right: 10%; width: 200px; height: 200px; animation-delay: 8s; }
+        .bg-float:nth-child(3) { top: 40%; right: 40%; background-color: rgba(236, 72, 153, 0.15); animation-delay: 15s; }
+
+        @keyframes float-element {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -40px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* Custom utility to make card backgrounds slightly different than body */
+        .card-bg {
+            background-color: #1F2937;
+        }
+
+    </style>
+</head>
+<body onload="lucide.createIcons()">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#111827', /* Black */
+                        'secondary-dark': '#1F2937', /* Deep Gray for cards */
+                        'primary-purple': '#4F46E5', /* Indigo-600 */
+                        'accent-magenta': '#EC4899', /* Pink-500 */
+                        'accent-indigo': '#A78BFA', /* Indigo-400 */
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Floating Background Shapes -->
+    <div class="bg-float"></div>
+    <div class="bg-float"></div>
+    <div class="bg-float"></div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10">
+
+        <!-- Navigation Bar -->
+        <nav class="sticky top-0 z-50 bg-primary-dark/95 backdrop-blur-sm shadow-xl border-b border-gray-800">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex justify-between items-center">
+                <!-- Logo/Brand -->
+                <a href="#hero" class="text-3xl font-extrabold text-white tracking-tight">
+                    <span class="text-accent-indigo">Next</span>Scholars
+                </a>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#mission" class="text-gray-300 hover:text-accent-indigo transition duration-300">Mission</a>
+                    <a href="#programs" class="text-gray-300 hover:text-accent-indigo transition duration-300">Programs</a>
+                    <a href="#leadership" class="text-gray-300 hover:text-accent-indigo transition duration-300">Leadership</a>
+                    <a href="#enrollment" class="text-gray-300 hover:text-accent-indigo transition duration-300">Enrollment</a>
+                    
+                    <!-- Enrollment Button (Updated Link) -->
+                    <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank" class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white text-sm">
+                        Enroll Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Icon (Placeholder) -->
+                <button class="md:hidden text-gray-300 focus:outline-none">
+                    <svg data-lucide="menu" class="w-6 h-6"></svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- 1. Hero Section -->
+        <section id="hero" class="py-20 lg:py-40 text-center max-w-7xl mx-auto px-6 lg:px-8">
+            <h1 class="text-7xl lg:text-9xl font-extrabold leading-none tracking-tight mb-8">
+                <span class="text-gradient block">Education is a Right.</span>
+                <span class="block text-white text-4xl lg:text-5xl font-light mt-4">Not a Luxury.</span>
+            </h1>
+            <p class="text-xl lg:text-2xl max-w-4xl mx-auto text-gray-300 mb-12">
+                NextScholars is a non-profit dedicated to empowering students to learn through innovative courses, offering critical leadership experience, and building strong local communities.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <!-- Apply Now - Chapter Leader/Area Manager (Updated Link) -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform?usp=header" target="_blank" class="px-10 py-4 rounded-full font-bold btn-vibrant text-white text-lg hover:ring-4 hover:ring-accent-magenta/50">
+                    Apply to Start a Chapter
+                </a>
+                
+                <!-- Secondary CTA - Officer Application (NEW BUTTON) -->
+                <a href="https://forms.fillout.com/t/mnVhYMD4xpus" target="_blank" class="px-10 py-4 rounded-full font-semibold text-white bg-transparent border-2 border-accent-indigo hover:bg-accent-indigo/10 transition duration-300 text-lg">
+                    Officer Application
+                </a>
+            </div>
+        </section>
+
+        <!-- NEW 2. Mission & Vision Section -->
+        <section id="mission" class="py-20 lg:py-32 max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-20 items-center">
+                
+                <!-- Mission Statement -->
+                <div class="mb-12 lg:mb-0">
+                    <p class="text-sm font-semibold uppercase tracking-widest text-accent-magenta mb-3">Our Why</p>
+                    <h2 class="text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+                        Making Education <span class="text-gradient">a Reality</span> for Everyone.
+                    </h2>
+                    <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                        At NextScholars, our vision is simple: to dismantle the financial barriers that make quality education a luxury. We believe every K-8 student, regardless of their background, deserves access to cutting-edge instruction in STEM and leadership.
+                    </p>
+                    <div class="flex items-center text-accent-indigo font-bold text-lg">
+                        <svg data-lucide="award" class="w-6 h-6 mr-3"></svg>
+                        <span>Empowering Future Leaders, Today.</span>
+                    </div>
+                </div>
+
+                <!-- Impact Metrics / Key Pillars -->
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="card-bg p-6 rounded-xl border border-gray-700">
+                        <svg data-lucide="lightbulb" class="w-8 h-8 text-accent-magenta mb-3"></svg>
+                        <p class="text-3xl font-bold text-white">100%</p>
+                        <p class="text-gray-400 text-sm mt-1">Free Programs</p>
+                    </div>
+                    <div class="card-bg p-6 rounded-xl border border-gray-700">
+                        <svg data-lucide="cpu" class="w-8 h-8 text-accent-magenta mb-3"></svg>
+                        <p class="text-3xl font-bold text-white">STEM</p>
+                        <p class="text-gray-400 text-sm mt-1">Core Focus Area</p>
+                    </div>
+                    <div class="card-bg p-6 rounded-xl border border-gray-700">
+                        <svg data-lucide="users-2" class="w-8 h-8 text-accent-magenta mb-3"></svg>
+                        <p class="text-3xl font-bold text-white">25</p>
+                        <p class="text-gray-400 text-sm mt-1">Student Class Cap</p>
+                    </div>
+                    <div class="card-bg p-6 rounded-xl border border-gray-700">
+                        <svg data-lucide="trending-up" class="w-8 h-8 text-accent-magenta mb-3"></svg>
+                        <p class="text-3xl font-bold text-white">1:5</p>
+                        <p class="text-gray-400 text-sm mt-1">Leader-Student Ratio</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Programs Section -->
+        <section id="programs" class="py-20 lg:py-32 bg-secondary-dark border-y border-gray-800">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-gradient mb-4">Innovative Courses & Growth</h2>
+                    <p class="text-xl text-gray-400 max-w-3xl mx-auto">We unlock student potential by focusing on the skills that matter most for the future.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1: Cutting-Edge Courses -->
+                    <div class="card-bg p-8 rounded-2xl shadow-2xl border border-gray-700 hover:border-accent-indigo transition duration-300">
+                        <svg data-lucide="code" class="w-10 h-10 text-accent-magenta mb-4"></svg>
+                        <h3 class="text-2xl font-bold text-white mb-3">Next-Generation Courses</h3>
+                        <p class="text-gray-400">We offer accelerated classes in **AI, robotics, coding, and more**. These hands-on, project-based subjects spark curiosity and provide critical technological fluency.</p>
+                    </div>
+
+                    <!-- Card 2: Leadership Experience -->
+                    <div class="card-bg p-8 rounded-2xl shadow-2xl border border-gray-700 hover:border-accent-indigo transition duration-300">
+                        <svg data-lucide="users" class="w-10 h-10 text-accent-magenta mb-4"></svg>
+                        <h3 class="text-2xl font-bold text-white mb-3">Teaching & Mentorship</h3>
+                        <p class="text-gray-400">Gain invaluable leadership experience by **teaching and mentoring** younger students. Develop public speaking, instructional design, and motivational skills that boost any resume.</p>
+                    </div>
+
+                    <!-- Card 3: Community Building -->
+                    <div class="card-bg p-8 rounded-2xl shadow-2xl border border-gray-700 hover:border-accent-indigo transition duration-300">
+                        <svg data-lucide="home" class="w-10 h-10 text-accent-magenta mb-4"></svg>
+                        <h3 class="text-2xl font-bold text-white mb-3">Build Local Chapters</h3>
+                        <p class="text-gray-400">Be the catalyst for change in your area. By **starting local chapters**, you build communities of learning and leadership that directly serve your peers and younger neighbors.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Leadership Opportunities Section -->
+        <section id="leadership" class="py-20 lg:py-32 max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+                
+                <!-- Left Column: Chapter Leader Role Summary -->
+                <div class="lg:col-span-6 mb-12 lg:mb-0">
+                    <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Lead a Chapter, Make an Impact</h2>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                        Chapter leaders are the heart of our mission. Want to bring NextScholars to your school or community? You'll gain valuable mentorship opportunities and strong resume boosters.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold text-accent-indigo mb-4">Core Responsibilities:</h3>
+                    <ul class="space-y-3 text-gray-400 list-disc list-inside">
+                        <li>Recruiting students and teachers to join your local chapter.</li>
+                        <li>Organizing local classes, workshops, and secure meeting spaces.</li>
+                        <li>Hosting events that promote leadership and learning among peers.</li>
+                        <li>Building strong connections between your chapter and the larger NextScholars network.</li>
+                        <li>Team Management (Overseeing the 10 management roles below).</li>
+                    </ul>
+
+                    <div class="mt-10 space-y-4">
+                         <!-- Application for Chapter Leader/Area Manager (Updated Link) -->
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform?usp=header" target="_blank" class="px-8 py-3 rounded-full font-bold btn-vibrant text-white text-base inline-flex items-center">
+                            Chapter Leader Application <svg data-lucide="arrow-right" class="w-5 h-5 ml-2"></svg>
+                        </a>
+                        <p class="text-sm text-gray-500 mt-2 italic">Interviews for these key roles (President/VP, Area Manager) open early October.</p>
+                        
+                        <!-- NEW: Officer Application Button (Updated Link) -->
+                        <a href="https://forms.fillout.com/t/mnVhYMD4xpus" target="_blank" class="px-8 py-3 rounded-full font-bold text-white text-base inline-flex items-center bg-gray-600 hover:bg-gray-700 transition duration-300">
+                            Officer Application (Late October) <svg data-lucide="users-round" class="w-5 h-5 ml-2"></svg>
+                        </a>
+                        <p class="text-sm text-gray-500 italic">Common application for all other Officer roles (Secretary, Treasurer, etc.) opens late October.</p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Chapter Structure -->
+                <div class="lg:col-span-6 card-bg p-8 rounded-2xl shadow-2xl border border-gray-700">
+                    <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                        <svg data-lucide="graduation-cap" class="w-6 h-6 text-accent-magenta mr-2"></svg>
+                        Chapter Management Structure
+                    </h3>
+                    <p class="text-gray-400 mb-6">Each successful chapter is built around these essential, high-impact roles:</p>
+                    
+                    <div class="grid sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
+                        <ul class="space-y-2">
+                            <li class="font-semibold text-white">President/Leader (Interviewed)</li>
+                            <li class="font-semibold text-white">Vice President (Interviewed)</li>
+                            <li>Secretary (Officer Role)</li>
+                            <li>Treasurer (Officer Role)</li>
+                            <li>Outreach Director (Officer Role)</li>
+                        </ul>
+                        <ul class="space-y-2">
+                            <li>Marketing & Media Lead (Officer Role)</li>
+                            <li>Events Coordinator (Officer Role)</li>
+                            <li>Education/Programs Lead (Officer Role)</li>
+                            <li>Recruitment Chair (Officer Role)</li>
+                            <li>Tech/Logistics Lead (Officer Role)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-700">
+                        <h4 class="text-xl font-bold text-accent-indigo mb-2">Area Managers</h4>
+                        <p class="text-gray-400 text-sm">Area Managers oversee multiple chapters, provide support, and ensure smooth operations across a region.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 5. Enrollment Section (Student Focus) -->
+        <section id="enrollment" class="py-20 lg:py-32 bg-primary-dark">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-12 items-center">
+                    <!-- Left Column: Details -->
+                    <div class="mb-10 lg:mb-0">
+                        <h2 class="text-5xl font-bold text-gradient mb-6">Free Enrollment is Open!</h2>
+                        <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                            Enrollment for NextScholars acceleration classes is now open! Our programs are offered for **K–5th graders** and **6–8th graders**, and they are completely **free of charge**, making it the only program of its kind available today.
+                        </p>
+                        
+                        <ul class="space-y-4 text-gray-400">
+                            <li class="flex items-start">
+                                <svg data-lucide="check-circle" class="w-5 h-5 text-accent-magenta mt-1 mr-3 flex-shrink-0"></svg>
+                                <span><b>Small Class Sizes:</b> Each acceleration class is capped at 25 students to keep groups small and focused for individualized attention.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg data-lucide="check-circle" class="w-5 h-5 text-accent-magenta mt-1 mr-3 flex-shrink-0"></svg>
+                                <span><b>Community Focused:</b> Students will be placed into classes by their local chapter, ensuring they learn alongside peers in their own community.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg data-lucide="check-circle" class="w-5 h-5 text-accent-magenta mt-1 mr-3 flex-shrink-0"></svg>
+                                <span><b>Holistic Learning:</b> Classes cover core enrichment subjects, hands-on projects, and leadership-focused activities to spark curiosity and growth.</span>
+                            </li>
+                        </ul>
+
+                        <p class="text-sm text-gray-500 mt-6">Enrollment is first come, first served, and once seats are filled, waitlists will be created.</p>
+                    </div>
+
+                    <!-- Right Column: CTA -->
+                    <div class="card-bg p-10 rounded-2xl shadow-2xl border border-gray-700 text-center">
+                        <svg data-lucide="book-open-text" class="w-16 h-16 text-accent-magenta mx-auto mb-6"></svg>
+                        <h3 class="text-3xl font-bold text-white mb-4">Secure Your Spot!</h3>
+                        <p class="text-gray-400 mb-8">Click below to access the official student enrollment form and join the NextScholars community.</p>
+                        
+                        <!-- Enrollment Form Link (Updated Link) -->
+                        <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank" class="px-10 py-4 rounded-full font-bold btn-vibrant text-white text-lg inline-block w-full">
+                            Begin Student Enrollment
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Footer & Contact -->
+        <footer class="py-12 bg-secondary-dark border-t border-gray-800">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 grid md:grid-cols-4 gap-10">
+                
+                <!-- Col 1: Brand & Mission -->
+                <div>
+                    <a href="#" class="text-2xl font-extrabold text-white tracking-tight mb-3 block">
+                        <span class="text-accent-indigo">Next</span>Scholars
+                    </a>
+                    <p class="text-gray-400 text-sm">Making education a right, not a luxury. Empowering the next generation of leaders and innovators.</p>
+                </div>
+                
+                <!-- Col 2: Contact Info -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Get In Touch</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center">
+                            <svg data-lucide="mail" class="w-4 h-4 mr-2 text-accent-magenta"></svg>
+                            <a href="mailto:Info@nextscholar.org" class="hover:text-white transition">Info@nextscholar.org</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg data-lucide="instagram" class="w-4 h-4 mr-2 text-accent-magenta"></svg>
+                            <a href="#" class="hover:text-white transition">Instagram DMs</a>
+                        </li>
+                        <li class="flex items-center">
+                            <svg data-lucide="facebook" class="w-4 h-4 mr-2 text-accent-magenta"></svg>
+                            <a href="#" class="hover:text-white transition">Find us on Facebook</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Support & Donate -->
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Support Our Mission</h4>
+                    <p class="text-gray-400 text-sm mb-4">Every donation goes directly to providing free, high-quality acceleration classes.</p>
+                    
+                    <!-- GoFundMe Link -->
+                    <a href="https://www.gofundme.com/manage/provide-free-tutoring-in-every-subject-empowering-students" target="_blank" class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white text-sm inline-block">
+                        <svg data-lucide="heart" class="w-4 h-4 mr-2 inline-block"></svg>
+                        Donate on GoFundMe
+                    </a>
+                </div>
+
+                <!-- Col 4: Quick Links -->
+                 <div>
+                    <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#programs" class="hover:text-white transition">Our Courses</a></li>
+                        <!-- Chapter Leader Link (Updated Link) -->
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform?usp=header" target="_blank" class="hover:text-white transition">Chapter Leader Application</a></li>
+                        <!-- Officer Link (Updated Link) -->
+                        <li><a href="https://forms.fillout.com/t/mnVhYMD4xpus" target="_blank" class="hover:text-white transition">Officer Application</a></li>
+                        <!-- Enrollment Link (Updated Link) -->
+                        <li><a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank" class="hover:text-white transition">Student Enrollment</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-10 pt-6 border-t border-gray-800 text-center">
+                <p class="text-gray-500 text-xs">&copy; 2025 NextScholars. All Rights Reserved. Nonprofit Initiative.</p>
+            </div>
+
+        </footer>
+
+    </div>
+
+</body>
 </html>
