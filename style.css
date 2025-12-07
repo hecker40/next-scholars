@@ -8,7 +8,7 @@
 }
 
 i.glide-svg {
-  color: #8e40f5;
+  color: #af73ff;
 	font-size: 30px !important;	
 	margin-top: 50px;
 	cursor: pointer;
@@ -27,5 +27,5 @@ i.glide-svg {
 
 i:hover {
 	transform: scale(1.1);
-	color: #9645ff;
+	color: #b783fc;
 }
