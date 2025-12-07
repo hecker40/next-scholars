@@ -28,3 +28,7 @@ i:hover {
 	transform: scale(1.1);
 	color: #b783fc;
 }
+
+i {
+	font-size: 80px !important;
+}
