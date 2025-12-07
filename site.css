@@ -1,0 +1,31 @@
+.glide-container {
+	display: flex;
+	justify-content: center;
+}
+
+.glide-container a:after {
+	border-bottom: none !important;
+}
+
+i.glide-svg {
+  color: #af73ff;
+  font-size: 80px;
+	margin-top: 50px;
+	cursor: pointer;
+	animation: glide 2s infinite;
+	position: relative;
+	transition-duration: 0.4s;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@keyframes glide {
+	0% { bottom: 0px; }
+	50% { bottom: -15px; }
+	100% { bottom: 0px; }
+}
+
+i:hover {
+	transform: scale(1.1);
+	color: #b783fc;
+}
