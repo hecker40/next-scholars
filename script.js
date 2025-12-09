@@ -1,19 +1,13 @@
-$(window).on('scroll', function() {
-    var scroll = $(window).scrollTop();
-  
-    console.log(scroll > 100);
-  
-    if (scroll) {
-      $('nav').removeClass('nav-fade');
-      $('nav').addClass('nav-show');
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                'primary-dark': '#111827',
+                'secondary-dark': '#1F2937',
+                'primary-purple': '#4F46E5',
+                'accent-magenta': '#EC4899',
+                'accent-indigo': '#A78BFA'
+            }
+        }
     }
-  
-    else {
-      $('nav').removeClass('nav-show');
-      $('nav').addClass('nav-fade')
-    }
-  })
-  
-  function nav() {
-    document.getElementById("navbar").classList.toggle("nav-open");
 }
