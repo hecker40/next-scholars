@@ -12,6 +12,7 @@ i.glide-svg {
 	transition-duration: 0.4s;
 	margin-left: auto;
 	margin-right: auto;
+	z-index: 1000;
 }
 
 @keyframes glide {
