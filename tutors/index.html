@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -473,5 +473,419 @@
             });
         }
     </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextScholar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        :root {
+            --accent-indigo: #6366f1;
+            --accent-magenta: #e879f9;
+            --primary-dark: #050c1a;
+            --secondary-dark: #0d1424;
+            --glass-bg: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: #e2e8f0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* ── Floating blobs ── */
+        .bg-float {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatAnim 18s ease-in-out infinite alternate;
+        }
+        .bg-float:nth-child(1) { width: 600px; height: 600px; background: var(--accent-indigo); top: -200px; left: -150px; animation-duration: 20s; }
+        .bg-float:nth-child(2) { width: 500px; height: 500px; background: var(--accent-magenta); top: 40%; right: -200px; animation-duration: 25s; }
+        .bg-float:nth-child(3) { width: 400px; height: 400px; background: var(--accent-indigo); bottom: -100px; left: 30%; animation-duration: 22s; }
+
+        @keyframes floatAnim {
+            0%   { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.08); }
+        }
+
+        /* ── Glass card ── */
+        .glass {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .glass:hover {
+            border-color: var(--accent-indigo);
+            transition: border-color .3s;
+        }
+
+        /* ── Gradient text ── */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── Vibrant button ── */
+        .btn-vibrant {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-magenta));
+            transition: opacity .2s, transform .2s;
+        }
+        .btn-vibrant:hover { opacity: .88; transform: translateY(-1px); }
+
+        /* ── Chevron glide ── */
+        .glide-container {
+            margin-top: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+        .glide-svg {
+            font-size: 1.8rem;
+            color: var(--accent-indigo);
+            animation: glide 2s ease-in-out infinite;
+            opacity: .7;
+        }
+        @keyframes glide {
+            0%, 100% { transform: translateY(0); opacity: .5; }
+            50%       { transform: translateY(10px); opacity: 1; }
+        }
+
+        /* ── Stat card hover ── */
+        .stat-card {
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(99,102,241,.15);
+            border-color: var(--accent-indigo) !important;
+        }
+
+        /* ── Program card ── */
+        .program-card {
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(99,102,241,.15);
+            border-color: var(--accent-indigo) !important;
+        }
+
+        /* section z-index */
+        header, section, footer { position: relative; z-index: 10; }
+    </style>
+</head>
+<body onload="lucide.createIcons()">
+
+    <!-- Floating blobs -->
+    <div class="bg-float"></div>
+    <div class="bg-float"></div>
+    <div class="bg-float"></div>
+
+    <!-- ── NAVBAR ── -->
+    <nav class="sticky top-0 z-50 backdrop-blur-sm border-b border-gray-800 py-4" style="background:rgba(5,12,26,0.95);">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-extrabold text-white">
+                <span style="color:var(--accent-indigo)">Next</span>Scholar
+            </a>
+
+            <div class="hidden md:flex space-x-8 items-center text-gray-300">
+                <a href="#mission" class="hover:text-white transition" style="--tw-text-opacity:1">Mission</a>
+                <a href="#programs" class="hover:text-white transition">Programs</a>
+                <a href="tutors.html" class="hover:text-white transition">Tutors</a>
+                <a href="#leadership" class="hover:text-white transition">Leadership</a>
+                <a href="#enroll" class="hover:text-white transition">Enrollment</a>
+                <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank"
+                   class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white">
+                    Enroll Now
+                </a>
+            </div>
+
+            <button class="md:hidden text-gray-300">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <header class="py-24 max-w-7xl mx-auto px-6 text-center">
+        <h1 class="text-8xl font-extrabold leading-none">
+            <span class="text-gradient block">Education is a Right.</span>
+            <span class="text-white text-4xl font-light mt-4 block">Not a Luxury.</span>
+        </h1>
+
+        <p class="mt-8 text-2xl max-w-3xl mx-auto text-gray-300">
+            NextScholars provides free STEM tutoring, hands-on workshops, leadership pathways, and
+            community-driven chapters for students everywhere.
+        </p>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-6">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform"
+               target="_blank"
+               class="px-10 py-4 rounded-full btn-vibrant text-white font-bold text-lg">
+                Start a Chapter
+            </a>
+            <a href="https://forms.fillout.com/t/mnVhYMD4xpus"
+               target="_blank"
+               class="px-10 py-4 rounded-full text-white font-semibold text-lg transition hover:bg-white/10"
+               style="border: 1px solid var(--accent-indigo)">
+                Officer Application
+            </a>
+        </div>
+
+        <div class="glide-container">
+            <a href="#mission"><i class="fa-sharp fa-solid fa-chevron-down glide-svg"></i></a>
+        </div>
+    </header>
+
+    <!-- ── MISSION ── -->
+    <section id="mission" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+            <div>
+                <p class="uppercase tracking-widest font-semibold mb-3" style="color:var(--accent-magenta)">Our Why</p>
+                <h2 class="text-5xl font-extrabold text-white mb-6">Making Education <span class="text-gradient">Accessible</span> for All</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                    We break financial and structural barriers so every student can experience high-quality STEM learning, mentorship, and leadership opportunities. By removing the obstacles that limit access, we empower young innovators to explore their passions, develop real-world skills, and build the confidence to shape their own futures.
+                </p>
+                <div class="flex items-center font-bold text-lg" style="color:var(--accent-indigo)">
+                    <i data-lucide="award" class="w-6 h-6 mr-3"></i>
+                    <span>Empowering Future Leaders with STEM</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="glass stat-card p-6 rounded-xl">
+                    <i data-lucide="lightbulb" class="w-8 h-8 mb-3" style="color:var(--accent-magenta)"></i>
+                    <p class="text-3xl font-bold">100%</p>
+                    <p class="text-sm text-gray-400">Free Programs</p>
+                </div>
+                <div class="glass stat-card p-6 rounded-xl">
+                    <i data-lucide="cpu" class="w-8 h-8 mb-3" style="color:var(--accent-magenta)"></i>
+                    <p class="text-3xl font-bold">STEM</p>
+                    <p class="text-sm text-gray-400">Core Focus</p>
+                </div>
+                <div class="glass stat-card p-6 rounded-xl">
+                    <i data-lucide="users" class="w-8 h-8 mb-3" style="color:var(--accent-magenta)"></i>
+                    <p class="text-3xl font-bold">25</p>
+                    <p class="text-sm text-gray-400">Student Cap</p>
+                </div>
+                <div class="glass stat-card p-6 rounded-xl">
+                    <i data-lucide="trending-up" class="w-8 h-8 mb-3" style="color:var(--accent-magenta)"></i>
+                    <p class="text-3xl font-bold">1:5</p>
+                    <p class="text-sm text-gray-400">Leader Ratio</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── PROGRAMS ── -->
+    <section id="programs" class="py-24 border-y border-gray-800" style="background:linear-gradient(135deg,#0a0f1a,#111827)">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-extrabold text-gradient">Innovative Courses & Growth</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto mt-4">
+                    Hands-on experiences in robotics, AI, coding, reading intervention, leadership, and more.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="glass program-card p-8 rounded-2xl">
+                    <i data-lucide="code" class="w-10 h-10 mb-4" style="color:var(--accent-magenta)"></i>
+                    <h3 class="text-2xl font-bold text-white mb-3">Next-Gen Courses</h3>
+                    <p class="text-gray-400">Project-based STEM learning that builds real tech skills and creativity.</p>
+                </div>
+                <div class="glass program-card p-8 rounded-2xl">
+                    <i data-lucide="users" class="w-10 h-10 mb-4" style="color:var(--accent-magenta)"></i>
+                    <h3 class="text-2xl font-bold text-white mb-3">Leadership & Mentorship</h3>
+                    <p class="text-gray-400">High school leaders teach younger students, gaining mentorship and communication skills.</p>
+                </div>
+                <div class="glass program-card p-8 rounded-2xl">
+                    <i data-lucide="home" class="w-10 h-10 mb-4" style="color:var(--accent-magenta)"></i>
+                    <h3 class="text-2xl font-bold text-white mb-3">Local Chapters</h3>
+                    <p class="text-gray-400">Build community-driven education hubs that uplift entire neighborhoods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── LEADERSHIP ── -->
+    <section id="leadership" class="py-24 max-w-7xl mx-auto px-6">
+        <p class="uppercase tracking-widest font-semibold mb-3" style="color:var(--accent-magenta)">Leadership</p>
+        <h2 class="text-5xl font-extrabold mb-6 text-white">Build <span class="text-gradient">Communities</span>,<br>Lead a Chapter</h2>
+
+        <div class="lg:grid lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-6 mb-12 lg:mb-0">
+                <p class="text-xl text-gray-300 mb-8">
+                    Chapter leaders are the heart of our mission. Want to bring NextScholars to your school or community? You'll gain valuable mentorship opportunities and strong resume boosters.
+                </p>
+
+                <h3 class="text-2xl font-semibold mb-4" style="color:var(--accent-indigo)">Core Responsibilities:</h3>
+                <ul class="list-disc list-inside text-gray-400 space-y-2">
+                    <li>Recruit students and tutors</li>
+                    <li>Organize workshops & events</li>
+                    <li>Build partnerships</li>
+                    <li>Lead chapter meetings</li>
+                    <li>Manage officer teams</li>
+                </ul>
+
+                <div class="mt-10">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform"
+                       class="px-8 py-3 btn-vibrant text-white rounded-full font-bold inline-flex items-center">
+                        Chapter Leader Application <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 glass p-8 rounded-2xl shadow-2xl border border-gray-700">
+                <h3 class="text-2xl font-bold text-white mb-4 flex items-center">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 mr-2" style="color:var(--accent-magenta)"></i>
+                    Chapter Management Structure
+                </h3>
+                <p class="text-gray-400 mb-6">Each successful chapter is built around these essential, high-impact roles:</p>
+
+                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
+                    <ul class="space-y-2">
+                        <li class="font-semibold text-white">President/Leader (Interviewed)</li>
+                        <li class="font-semibold text-white">Vice President (Interviewed)</li>
+                        <li class="text-gray-400">Secretary (Officer Role)</li>
+                        <li class="text-gray-400">Treasurer (Officer Role)</li>
+                        <li class="text-gray-400">Outreach Director (Officer Role)</li>
+                    </ul>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Marketing &amp; Media Lead (Officer Role)</li>
+                        <li>Events Coordinator (Officer Role)</li>
+                        <li>Education/Programs Lead (Officer Role)</li>
+                        <li>Recruitment Chair (Officer Role)</li>
+                        <li>Tech/Logistics Lead (Officer Role)</li>
+                    </ul>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-700">
+                    <h4 class="text-xl font-bold mb-2" style="color:var(--accent-indigo)">Area Managers</h4>
+                    <p class="text-gray-400 text-sm">Area Managers oversee multiple chapters, provide support, and ensure smooth operations across a region.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── ENROLLMENT ── -->
+    <section id="enroll" class="py-24 border-y border-gray-800" style="background:linear-gradient(135deg,#0a0f1a,#111827)">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12">
+
+            <div>
+                <p class="uppercase tracking-widest font-semibold mb-3" style="color:var(--accent-magenta)">Courses</p>
+                <h2 class="text-5xl font-extrabold mb-6 text-white"><span class="text-gradient">Free</span> Enrollment and Classes</h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    Students K–8 can join small-group STEM classes at no cost.
+                </p>
+
+                <ul class="space-y-4 text-gray-400">
+                    <li class="flex items-start">
+                        <i data-lucide="check-circle" class="w-5 h-5 mt-1 mr-3 flex-shrink-0" style="color:var(--accent-magenta)"></i>
+                        Small classes capped at 25 students
+                    </li>
+                    <li class="flex items-start">
+                        <i data-lucide="check-circle" class="w-5 h-5 mt-1 mr-3 flex-shrink-0" style="color:var(--accent-magenta)"></i>
+                        Hands-on STEM exploration
+                    </li>
+                    <li class="flex items-start">
+                        <i data-lucide="check-circle" class="w-5 h-5 mt-1 mr-3 flex-shrink-0" style="color:var(--accent-magenta)"></i>
+                        Community-based cohorts
+                    </li>
+                </ul>
+
+                <p class="text-gray-500 text-sm mt-6">Enrollment is first-come, first-served.</p>
+            </div>
+
+            <div class="glass p-10 rounded-2xl text-center">
+                <i data-lucide="book-open-text" class="w-16 h-16 mx-auto mb-6" style="color:var(--accent-magenta)"></i>
+                <h3 class="text-3xl font-bold text-white mb-3">Secure Your Spot</h3>
+                <p class="text-gray-400 mb-6">Tap the button below to access the student enrollment form.</p>
+                <a href="https://forms.fillout.com/t/iBpbAT4t5Aus"
+                   class="px-10 py-4 w-full btn-vibrant rounded-full text-white font-bold text-lg inline-block">
+                    Begin Enrollment
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="py-12 border-t border-gray-600" style="background:var(--secondary-dark)">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid md:grid-cols-4 gap-10">
+
+            <div>
+                <a href="index.html" class="text-2xl font-extrabold text-white tracking-tight mb-3 block">
+                    <span style="color:var(--accent-indigo)">Next</span>Scholar
+                </a>
+                <p class="text-gray-400 text-sm">Making education a right, not a luxury. Empowering the next generation of leaders and innovators.</p>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Get In Touch</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li class="flex items-center">
+                        <i data-lucide="mail" class="w-4 h-4 mr-2" style="color:var(--accent-magenta)"></i>
+                        <a href="mailto:info@nextscholar.org" class="hover:text-white transition">info@nextscholar.org</a>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-lucide="instagram" class="w-4 h-4 mr-2" style="color:var(--accent-magenta)"></i>
+                        <a href="#" class="hover:text-white transition">Instagram DMs</a>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-lucide="facebook" class="w-4 h-4 mr-2" style="color:var(--accent-magenta)"></i>
+                        <a href="#" class="hover:text-white transition">Find us on Facebook</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Support Our Mission</h4>
+                <p class="text-gray-400 text-sm mb-4">Every donation goes directly to providing free, high-quality acceleration classes.</p>
+                <a href="https://www.gofundme.com/manage/provide-free-tutoring-in-every-subject-empowering-students"
+                   target="_blank"
+                   class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white text-sm inline-block">
+                    <i data-lucide="heart" class="w-4 h-4 mr-2 inline-block"></i> Donate on GoFundMe
+                </a>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#programs" class="hover:text-white transition">Our Courses</a></li>
+                    <li><a href="tutors.html" class="hover:text-white transition">Meet the Tutors</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform?usp=header" target="_blank" class="hover:text-white transition">Chapter Leader Application</a></li>
+                    <li><a href="https://forms.fillout.com/t/mnVhYMD4xpus" target="_blank" class="hover:text-white transition">Officer Application</a></li>
+                    <li><a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank" class="hover:text-white transition">Student Enrollment</a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-gray-800 text-center">
+            <p class="text-gray-500 text-xs">© 2025 NextScholar. All Rights Reserved. Nonprofit Initiative.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
