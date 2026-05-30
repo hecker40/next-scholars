@@ -1,1 +1,499 @@
-test page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Tutors – NextScholar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        :root {
+            --accent-indigo: #6366f1;
+            --accent-magenta: #e879f9;
+            --primary-dark: #050c1a;
+            --secondary-dark: #0d1424;
+            --glass-bg: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: #e2e8f0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* ── Floating blobs (same as homepage) ── */
+        .bg-float {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatAnim 18s ease-in-out infinite alternate;
+        }
+        .bg-float:nth-child(1) { width: 600px; height: 600px; background: var(--accent-indigo); top: -200px; left: -150px; animation-duration: 20s; }
+        .bg-float:nth-child(2) { width: 500px; height: 500px; background: var(--accent-magenta); top: 40%; right: -200px; animation-duration: 25s; }
+        .bg-float:nth-child(3) { width: 400px; height: 400px; background: var(--accent-indigo); bottom: -100px; left: 30%; animation-duration: 22s; }
+
+        @keyframes floatAnim {
+            0%   { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.08); }
+        }
+
+        /* ── Glass card ── */
+        .glass {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        /* ── Gradient text ── */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ── Vibrant button ── */
+        .btn-vibrant {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-magenta));
+            transition: opacity .2s, transform .2s;
+        }
+        .btn-vibrant:hover { opacity: .88; transform: translateY(-1px); }
+
+        /* ── Tutor card ── */
+        .tutor-card {
+            position: relative;
+            overflow: hidden;
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+        }
+        .tutor-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(99,102,241,.18);
+            border-color: var(--accent-indigo) !important;
+        }
+
+        /* avatar placeholder ring */
+        .avatar-ring {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-magenta));
+            padding: 3px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .avatar-inner {
+            background: var(--secondary-dark);
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-indigo);
+        }
+
+        /* subject badge */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            background: rgba(99,102,241,.15);
+            color: #a5b4fc;
+            border: 1px solid rgba(99,102,241,.3);
+            margin: 2px;
+        }
+
+        /* ── Filter pills ── */
+        .filter-pill {
+            cursor: pointer;
+            padding: 6px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            font-size: .85rem;
+            font-weight: 600;
+            color: #94a3b8;
+            background: var(--glass-bg);
+            transition: all .2s;
+        }
+        .filter-pill:hover, .filter-pill.active {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-magenta));
+            color: #fff;
+            border-color: transparent;
+        }
+
+        /* ── Stats strip ── */
+        .stat-strip {
+            background: linear-gradient(90deg, rgba(99,102,241,.08), rgba(232,121,249,.08));
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        /* card stagger animation */
+        .tutor-card { opacity: 0; animation: fadeUp .5s ease forwards; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        .tutor-card:nth-child(1) { animation-delay: .05s; transform: translateY(24px); }
+        .tutor-card:nth-child(2) { animation-delay: .10s; transform: translateY(24px); }
+        .tutor-card:nth-child(3) { animation-delay: .15s; transform: translateY(24px); }
+        .tutor-card:nth-child(4) { animation-delay: .20s; transform: translateY(24px); }
+        .tutor-card:nth-child(5) { animation-delay: .25s; transform: translateY(24px); }
+        .tutor-card:nth-child(6) { animation-delay: .30s; transform: translateY(24px); }
+        .tutor-card:nth-child(7) { animation-delay: .35s; transform: translateY(24px); }
+        .tutor-card:nth-child(8) { animation-delay: .40s; transform: translateY(24px); }
+
+        /* decorative top accent line on card */
+        .tutor-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-magenta));
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .tutor-card:hover::before { opacity: 1; }
+    </style>
+</head>
+<body onload="lucide.createIcons(); initFilters();">
+
+    <!-- Floating blobs -->
+    <div class="bg-float"></div>
+    <div class="bg-float"></div>
+    <div class="bg-float"></div>
+
+    <!-- ── NAVBAR ── -->
+    <nav class="sticky top-0 z-50 bg-[#050c1a]/95 backdrop-blur-sm border-b border-gray-800 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-10">
+            <a href="index.html" class="text-3xl font-extrabold text-white">
+                <span style="color:var(--accent-indigo)">Next</span>Scholar
+            </a>
+
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="index.html#mission" class="hover:text-indigo-400 transition text-gray-300">Mission</a>
+                <a href="index.html#programs" class="hover:text-indigo-400 transition text-gray-300">Programs</a>
+                <a href="tutors.html" class="text-white font-semibold border-b-2" style="border-color:var(--accent-indigo)">Tutors</a>
+                <a href="index.html#leadership" class="hover:text-indigo-400 transition text-gray-300">Leadership</a>
+                <a href="index.html#enroll" class="hover:text-indigo-400 transition text-gray-300">Enrollment</a>
+                <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank"
+                   class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white">
+                    Enroll Now
+                </a>
+            </div>
+
+            <button class="md:hidden text-gray-300">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <header class="relative z-10 py-20 text-center px-6">
+        <p class="uppercase tracking-widest font-semibold mb-3" style="color:var(--accent-magenta)">Our Team</p>
+        <h1 class="text-6xl md:text-7xl font-extrabold leading-tight">
+            <span class="text-gradient">Meet the Tutors</span><br>
+            <span class="text-white text-3xl font-light mt-3 block">Behind Every Breakthrough</span>
+        </h1>
+        <p class="mt-6 text-xl max-w-2xl mx-auto text-gray-300">
+            Our tutors are passionate high-school and college-level leaders dedicated to making STEM click for every student.
+        </p>
+    </header>
+
+    <!-- ── STATS STRIP ── -->
+    <div class="stat-strip relative z-10 py-8">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+                <p class="text-4xl font-extrabold text-gradient">8+</p>
+                <p class="text-gray-400 text-sm mt-1">Tutors Nationwide</p>
+            </div>
+            <div>
+                <p class="text-4xl font-extrabold text-gradient">6</p>
+                <p class="text-gray-400 text-sm mt-1">STEM Subjects</p>
+            </div>
+            <div>
+                <p class="text-4xl font-extrabold text-gradient">100%</p>
+                <p class="text-gray-400 text-sm mt-1">Free for Students</p>
+            </div>
+            <div>
+                <p class="text-4xl font-extrabold text-gradient">1:5</p>
+                <p class="text-gray-400 text-sm mt-1">Leader Ratio</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── FILTER PILLS ── -->
+    <div class="relative z-10 max-w-7xl mx-auto px-6 mt-14 flex flex-wrap gap-3 justify-center" id="filter-bar">
+        <button class="filter-pill active" data-filter="all">All Tutors</button>
+        <button class="filter-pill" data-filter="math">Math</button>
+        <button class="filter-pill" data-filter="science">Science</button>
+        <button class="filter-pill" data-filter="coding">Coding</button>
+        <button class="filter-pill" data-filter="reading">Reading</button>
+        <button class="filter-pill" data-filter="robotics">Robotics</button>
+    </div>
+
+    <!-- ── TUTOR GRID ── -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 py-14">
+        <div id="tutor-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+            <!-- Tutor 1 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="math coding">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">AJ</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Alex Johnson</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Lead Math & Coding Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    A junior passionate about algebra and Python, Alex makes complex equations feel approachable through real-world examples and hands-on projects.
+                </p>
+                <div>
+                    <span class="badge">Math</span>
+                    <span class="badge">Coding</span>
+                </div>
+            </div>
+
+            <!-- Tutor 2 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="science reading">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">MP</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Maya Patel</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Science & Reading Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    With a love for biology and storytelling, Maya bridges science concepts with strong reading comprehension skills to help younger students thrive.
+                </p>
+                <div>
+                    <span class="badge">Science</span>
+                    <span class="badge">Reading</span>
+                </div>
+            </div>
+
+            <!-- Tutor 3 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="robotics coding">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">JL</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Jordan Lee</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Robotics & Coding Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Jordan competed in FRC robotics for three years and now channels that experience into fun, build-it-yourself sessions that spark creativity.
+                </p>
+                <div>
+                    <span class="badge">Robotics</span>
+                    <span class="badge">Coding</span>
+                </div>
+            </div>
+
+            <!-- Tutor 4 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="math science">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">SR</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Sofia Reyes</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Math & Science Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Sofia's patient teaching style and deep love for physics have helped dozens of students move from confusion to confidence in STEM classes.
+                </p>
+                <div>
+                    <span class="badge">Math</span>
+                    <span class="badge">Science</span>
+                </div>
+            </div>
+
+            <!-- Tutor 5 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="reading coding">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">EK</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Ethan Kim</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Reading & Coding Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Ethan combines a passion for literature and software to teach coding through story-driven projects, making every lesson engaging and memorable.
+                </p>
+                <div>
+                    <span class="badge">Reading</span>
+                    <span class="badge">Coding</span>
+                </div>
+            </div>
+
+            <!-- Tutor 6 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="robotics math">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">ZW</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Zara Williams</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Robotics & Math Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    A robotics club president, Zara loves demystifying math through engineering challenges that show students exactly why numbers matter in the real world.
+                </p>
+                <div>
+                    <span class="badge">Robotics</span>
+                    <span class="badge">Math</span>
+                </div>
+            </div>
+
+            <!-- Tutor 7 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="science reading">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">LG</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Liam Garcia</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Science & Reading Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Liam turns everyday phenomena into science lessons and encourages students to read deeply, building both curiosity and comprehension side by side.
+                </p>
+                <div>
+                    <span class="badge">Science</span>
+                    <span class="badge">Reading</span>
+                </div>
+            </div>
+
+            <!-- Tutor 8 -->
+            <div class="tutor-card glass rounded-2xl p-7 text-center" data-subjects="coding math robotics">
+                <div class="flex justify-center mb-5">
+                    <div class="avatar-ring">
+                        <div class="avatar-inner">NA</div>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold text-white">Nia Adams</h3>
+                <p class="text-indigo-400 text-sm font-semibold mt-1 mb-3">Coding, Math & Robotics Tutor</p>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Nia is a multi-disciplinary powerhouse who believes every kid has an inner engineer. Her workshops blend coding, math, and hardware in perfect harmony.
+                </p>
+                <div>
+                    <span class="badge">Coding</span>
+                    <span class="badge">Math</span>
+                    <span class="badge">Robotics</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <i data-lucide="search-x" class="w-12 h-12 mx-auto mb-4 text-gray-600"></i>
+            <p class="text-gray-500 text-lg">No tutors found for that subject.</p>
+        </div>
+    </main>
+
+    <!-- ── JOIN CTA ── -->
+    <section class="relative z-10 py-20 bg-gradient-to-br from-[#0a0f1a] to-[#111827] border-y border-gray-800">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <p class="uppercase tracking-widest font-semibold mb-3" style="color:var(--accent-magenta)">Join Us</p>
+            <h2 class="text-5xl font-extrabold mb-6 text-white">Want to <span class="text-gradient">Become a Tutor?</span></h2>
+            <p class="text-gray-300 text-lg mb-10">
+                We're always looking for driven high-school students ready to make a difference. Apply for an officer role or start a chapter in your community.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://forms.fillout.com/t/mnVhYMD4xpus" target="_blank"
+                   class="px-10 py-4 rounded-full btn-vibrant text-white font-bold text-lg">
+                    Officer Application
+                </a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform" target="_blank"
+                   class="px-10 py-4 rounded-full border text-white font-semibold text-lg hover:bg-indigo-500/10 transition" style="border-color:var(--accent-indigo)">
+                    Start a Chapter
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="py-12 border-t border-gray-600" style="background:var(--secondary-dark)">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid md:grid-cols-4 gap-10">
+            <div>
+                <a href="index.html" class="text-2xl font-extrabold text-white tracking-tight mb-3 block">
+                    <span style="color:var(--accent-indigo)">Next</span>Scholar
+                </a>
+                <p class="text-gray-400 text-sm">Making education a right, not a luxury. Empowering the next generation of leaders and innovators.</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Get In Touch</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li class="flex items-center">
+                        <i data-lucide="mail" class="w-4 h-4 mr-2" style="color:var(--accent-magenta)"></i>
+                        <a href="mailto:info@nextscholar.org" class="hover:text-white transition">info@nextscholar.org</a>
+                    </li>
+                    <li class="flex items-center">
+                        <i data-lucide="instagram" class="w-4 h-4 mr-2" style="color:var(--accent-magenta)"></i>
+                        <a href="#" class="hover:text-white transition">Instagram DMs</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Support Our Mission</h4>
+                <p class="text-gray-400 text-sm mb-4">Every donation goes directly to providing free, high-quality acceleration classes.</p>
+                <a href="https://www.gofundme.com/manage/provide-free-tutoring-in-every-subject-empowering-students" target="_blank"
+                   class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white text-sm inline-block">
+                    <i data-lucide="heart" class="w-4 h-4 mr-2 inline-block"></i> Donate on GoFundMe
+                </a>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold text-white mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="index.html#programs" class="hover:text-white transition">Our Courses</a></li>
+                    <li><a href="tutors.html" class="hover:text-white transition">Meet the Tutors</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScbGEZSlukAEBjygwT4clhjjwRVPXLB-2DdktsuC-DxaS5cuQ/viewform" target="_blank" class="hover:text-white transition">Chapter Leader Application</a></li>
+                    <li><a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank" class="hover:text-white transition">Student Enrollment</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-gray-800 text-center">
+            <p class="text-gray-500 text-xs">© 2025 NextScholar. All Rights Reserved. Nonprofit Initiative.</p>
+        </div>
+    </footer>
+
+    <script>
+        function initFilters() {
+            lucide.createIcons();
+            const pills = document.querySelectorAll('.filter-pill');
+            const cards = document.querySelectorAll('.tutor-card');
+            const empty = document.getElementById('empty-state');
+
+            pills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    pills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+
+                    const filter = pill.dataset.filter;
+                    let visible = 0;
+
+                    cards.forEach(card => {
+                        const subjects = card.dataset.subjects || '';
+                        const show = filter === 'all' || subjects.includes(filter);
+                        card.style.display = show ? '' : 'none';
+                        if (show) visible++;
+                    });
+
+                    empty.classList.toggle('hidden', visible > 0);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
