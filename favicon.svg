@@ -42,7 +42,7 @@
   </defs>
 
   <!-- Black background -->
-  <rect x="90" y="90" width="500" height="500" rx="80" fill="#080808"/>
+  <rect x="0" y="0" width="680" height="680" rx="80" fill="#080808"/>
 
   <!-- Soft glow under cap -->
   <ellipse cx="340" cy="420" rx="180" ry="40" fill="url(#glow)"/>
