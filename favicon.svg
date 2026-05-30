@@ -1,6 +1,6 @@
-<svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+<svg width="500" height="500" viewBox="0 0 500 500" role="img" xmlns="http://www.w3.org/2000/svg">
   <title>NextScholar icon</title>
-  <desc>A detailed modern graduation cap icon in purple gradient on a black background</desc>
+  <desc>A modern graduation cap icon in purple gradient on a black background</desc>
 
   <defs>
     <linearGradient id="topFace" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -8,16 +8,16 @@
       <stop offset="100%" stop-color="#7c3aed"/>
     </linearGradient>
     <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#4338ca"/>
-      <stop offset="100%" stop-color="#6366f1"/>
+      <stop offset="0%" stop-color="#3730a3"/>
+      <stop offset="100%" stop-color="#5b46e5"/>
     </linearGradient>
     <linearGradient id="rightFace" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#7c3aed"/>
       <stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
     <linearGradient id="bodyLeft" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#3730a3"/>
-      <stop offset="100%" stop-color="#4f46e5"/>
+      <stop offset="0%" stop-color="#2e1f8a"/>
+      <stop offset="100%" stop-color="#4338ca"/>
     </linearGradient>
     <linearGradient id="bodyRight" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#6d28d9"/>
@@ -25,81 +25,107 @@
     </linearGradient>
     <linearGradient id="bodyFront" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#5b21b6"/>
-      <stop offset="100%" stop-color="#3730a3"/>
+      <stop offset="100%" stop-color="#2e1065"/>
     </linearGradient>
-    <linearGradient id="shine" x1="0%" y1="0%" x2="60%" y2="100%">
-      <stop offset="0%" stop-color="#fff" stop-opacity="0.22"/>
+    <linearGradient id="shine" x1="10%" y1="0%" x2="55%" y2="60%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="shineLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.10"/>
       <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="tasselStr" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#c4b5fd"/>
       <stop offset="100%" stop-color="#e879f9"/>
     </linearGradient>
-    <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+    <linearGradient id="bgGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#1e0a3c"/>
+      <stop offset="100%" stop-color="#080808"/>
     </linearGradient>
+
+    <!-- Hatching pattern for top face texture -->
+    <pattern id="hatch" patternUnits="userSpaceOnUse" width="18" height="18" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="18" stroke="#fff" stroke-width="0.6" opacity="0.07"/>
+    </pattern>
+
+    <!-- Dot pattern for body front -->
+    <pattern id="dots" patternUnits="userSpaceOnUse" width="10" height="10">
+      <circle cx="5" cy="5" r="1" fill="#fff" opacity="0.08"/>
+    </pattern>
+
+    <clipPath id="topClip">
+      <polygon points="250,30  490,220  250,410  10,220"/>
+    </clipPath>
+    <clipPath id="frontClip">
+      <polygon points="202,378  298,378  298,448  202,448"/>
+    </clipPath>
   </defs>
 
-  <!-- Black background -->
-  <rect x="0" y="0" width="680" height="680" rx="80" fill="#080808"/>
+  <!-- Background with subtle top glow -->
+  <rect x="0" y="0" width="500" height="500" fill="url(#bgGlow)"/>
 
-  <!-- Soft glow under cap -->
-  <ellipse cx="340" cy="420" rx="180" ry="40" fill="url(#glow)"/>
+  <!-- Ambient glow behind cap -->
+  <ellipse cx="250" cy="240" rx="200" ry="140" fill="#4f46e5" opacity="0.07"/>
 
-  <!-- ── MORTARBOARD BOARD (isometric diamond) ── -->
+  <!-- ── BOARD THICKNESS FACES ── -->
+  <polygon points="10,220  250,360  250,378  10,238" fill="url(#leftFace)"/>
+  <polygon points="10,220  250,360  250,378  10,238" fill="url(#shineLeft)"/>
+  <polygon points="490,220  250,360  250,378  490,238" fill="url(#rightFace)"/>
 
-  <!-- Left face of board thickness -->
-  <polygon points="150,300  340,400  340,415  150,315" fill="url(#leftFace)"/>
-  <!-- Right face of board thickness -->
-  <polygon points="530,300  340,400  340,415  530,315" fill="url(#rightFace)"/>
+  <!-- ── TOP FACE ── -->
+  <polygon points="250,30  490,220  250,410  10,220" fill="url(#topFace)"/>
+  <!-- Hatch texture on top -->
+  <polygon points="250,30  490,220  250,410  10,220" fill="url(#hatch)" clip-path="url(#topClip)"/>
+  <!-- Shine -->
+  <polygon points="250,30  490,220  250,410  10,220" fill="url(#shine)"/>
+  <!-- Edge highlight -->
+  <polygon points="250,30  490,220  250,410  10,220" fill="none" stroke="#c4b5fd" stroke-width="2" opacity="0.45"/>
 
-  <!-- Top face (main diamond) -->
-  <polygon points="340,185  530,300  340,415  150,300" fill="url(#topFace)"/>
+  <!-- Inner diamond inset (decorative border) -->
+  <polygon points="250,72  448,220  250,368  52,220" fill="none" stroke="#c4b5fd" stroke-width="1" opacity="0.13"/>
 
-  <!-- Shine on top -->
-  <polygon points="340,185  530,300  340,415  150,300" fill="url(#shine)"/>
+  <!-- Crease lines -->
+  <line x1="250" y1="30" x2="250" y2="410" stroke="#c4b5fd" stroke-width="1" opacity="0.14"/>
+  <line x1="10" y1="220" x2="490" y2="220" stroke="#c4b5fd" stroke-width="1" opacity="0.14"/>
 
-  <!-- Top face edge highlight -->
-  <polygon points="340,185  530,300  340,415  150,300" fill="none" stroke="#c4b5fd" stroke-width="1.5" opacity="0.5"/>
+  <!-- Corner pip accents -->
+  <circle cx="250" cy="30"  r="4" fill="#c4b5fd" opacity="0.5"/>
+  <circle cx="490" cy="220" r="4" fill="#c4b5fd" opacity="0.5"/>
+  <circle cx="250" cy="410" r="4" fill="#c4b5fd" opacity="0.5"/>
+  <circle cx="10"  cy="220" r="4" fill="#c4b5fd" opacity="0.5"/>
 
-  <!-- Center crease lines on board -->
-  <line x1="340" y1="185" x2="340" y2="415" stroke="#c4b5fd" stroke-width="1" opacity="0.15"/>
-  <line x1="150" y1="300" x2="530" y2="300" stroke="#c4b5fd" stroke-width="1" opacity="0.15"/>
-
-  <!-- ── CAP BODY (box under board) ── -->
-
-  <!-- Left side of body -->
-  <polygon points="284,415  284,490  340,510  340,435" fill="url(#bodyLeft)"/>
-  <!-- Right side of body -->
-  <polygon points="396,415  396,490  340,510  340,435" fill="url(#bodyRight)"/>
-  <!-- Front face of body -->
-  <polygon points="284,415  396,415  396,490  284,490" fill="url(#bodyFront)"/>
-
-  <!-- Front face highlight top edge -->
-  <line x1="284" y1="415" x2="396" y2="415" stroke="#8b5cf6" stroke-width="1.5" opacity="0.8"/>
-
-  <!-- Bottom ellipse cap -->
-  <ellipse cx="340" cy="490" rx="56" ry="10" fill="#2e1065"/>
-  <ellipse cx="340" cy="490" rx="56" ry="10" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+  <!-- ── CAP BODY ── -->
+  <polygon points="202,378  202,448  250,465  250,395" fill="url(#bodyLeft)"/>
+  <polygon points="298,378  298,448  250,465  250,395" fill="url(#bodyRight)"/>
+  <polygon points="202,378  298,378  298,448  202,448" fill="url(#bodyFront)"/>
+  <!-- Dot texture on front face -->
+  <polygon points="202,378  298,378  298,448  202,448" fill="url(#dots)" clip-path="url(#frontClip)"/>
+  <!-- Top edge highlight -->
+  <line x1="202" y1="378" x2="298" y2="378" stroke="#8b5cf6" stroke-width="2" opacity="0.9"/>
+  <!-- Vertical edge lines on body -->
+  <line x1="202" y1="378" x2="202" y2="448" stroke="#4338ca" stroke-width="1" opacity="0.6"/>
+  <line x1="298" y1="378" x2="298" y2="448" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+  <!-- Bottom ellipse -->
+  <ellipse cx="250" cy="448" rx="48" ry="9" fill="#1e0a3c"/>
+  <ellipse cx="250" cy="448" rx="48" ry="9" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.7"/>
 
   <!-- ── TASSEL ── -->
-  <!-- Button on center of board -->
-  <circle cx="340" cy="300" r="10" fill="#6366f1"/>
-  <circle cx="340" cy="300" r="10" fill="none" stroke="#a5b4fc" stroke-width="1.5" opacity="0.7"/>
-  <circle cx="340" cy="300" r="4" fill="#c4b5fd"/>
-
-  <!-- String going left and down -->
-  <path d="M340,300 Q260,300 240,370" fill="none" stroke="url(#tasselStr)" stroke-width="2.5" stroke-linecap="round"/>
-
-  <!-- Tassel knot -->
-  <circle cx="240" cy="372" r="7" fill="#a855f7"/>
-  <circle cx="240" cy="372" r="7" fill="none" stroke="#e879f9" stroke-width="1" opacity="0.6"/>
-
-  <!-- Tassel fringe -->
-  <line x1="230" y1="379" x2="222" y2="418" stroke="#e879f9" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="237" y1="379" x2="233" y2="420" stroke="#c026d3" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="244" y1="379" x2="244" y2="422" stroke="#a855f7" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="251" y1="379" x2="255" y2="420" stroke="#818cf8" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Center button -->
+  <circle cx="250" cy="220" r="14" fill="#4f46e5"/>
+  <circle cx="250" cy="220" r="14" fill="none" stroke="#a5b4fc" stroke-width="2" opacity="0.7"/>
+  <circle cx="250" cy="220" r="6"  fill="#c4b5fd"/>
+  <circle cx="250" cy="220" r="2.5" fill="#fff" opacity="0.8"/>
+  <!-- String -->
+  <path d="M250,220 Q158,220 136,308" fill="none" stroke="url(#tasselStr)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Knot -->
+  <circle cx="136" cy="310" r="10" fill="#a855f7"/>
+  <circle cx="136" cy="310" r="10" fill="none" stroke="#e879f9" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="136" cy="310" r="4" fill="#c4b5fd" opacity="0.7"/>
+  <!-- Fringe -->
+  <line x1="122" y1="320" x2="110" y2="372" stroke="#e879f9" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="132" y1="320" x2="126" y2="375" stroke="#c026d3" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="142" y1="320" x2="142" y2="377" stroke="#a855f7" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="152" y1="320" x2="158" y2="375" stroke="#818cf8" stroke-width="2.8" stroke-linecap="round"/>
 
 </svg>
