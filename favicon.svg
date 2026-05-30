@@ -63,7 +63,7 @@
   </defs>
 
   <!-- Background with subtle top glow -->
-  <rect x="0" y="0" width="500" height="500" fill="url(#bgGlow)"/>
+  <!-- <rect x="0" y="0" width="500" height="500" fill="url(#bgGlow)"/> -->
 
   <!-- Ambient glow behind cap -->
   <ellipse cx="250" cy="240" rx="200" ry="140" fill="#4f46e5" opacity="0.07"/>
