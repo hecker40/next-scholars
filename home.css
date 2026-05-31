@@ -2,8 +2,14 @@ html {
     scroll-behavior: smooth;
 }
 
-::selection {
-	background: rgba(185,156,255, 0.4) !important;
+html ::selection {
+    background-color: rgba(185, 156, 255, 0.4);
+    color: white;
+}
+
+html ::-moz-selection {
+    background-color: rgba(185, 156, 255, 0.4);
+    color: white;
 }
 
 i.glide-svg {
