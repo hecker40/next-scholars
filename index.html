@@ -12,31 +12,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="home.css">
 	<script>
-  const sections = document.querySelectorAll('section[id], header[id]');
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = ['mission', 'programs', 'leadership', 'enroll'];
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Remove active state from all links
-        navLinks.forEach(link => {
+    function getActiveSection() {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // If near top of page, nothing is active
+      if (scrollY < 100) return null;
+
+      let current = null;
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const top = el.getBoundingClientRect().top + scrollY;
+        if (scrollY >= top - windowHeight / 2) {
+          current = id;
+        }
+      });
+      return current;
+    }
+
+    function updateNav() {
+      const active = getActiveSection();
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href').replace('#', '');
+        if (href === active) {
+          link.classList.add('text-white', 'font-semibold');
+          link.classList.remove('text-gray-300');
+        } else {
           link.classList.remove('text-white', 'font-semibold');
           link.classList.add('text-gray-300');
-        });
-
-        // Add active state to matching link
-        const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
-        if (activeLink) {
-          activeLink.classList.add('text-white', 'font-semibold');
-          activeLink.classList.remove('text-gray-300');
         }
-      }
-    });
-  }, {
-    rootMargin: '-50% 0px -50% 0px'  // triggers when section hits the middle of the screen
-  });
+      });
+    }
 
-  sections.forEach(section => observer.observe(section));
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav(); // run once on load
+  });
 </script>
   </head>
 <body onload="lucide.createIcons()">
