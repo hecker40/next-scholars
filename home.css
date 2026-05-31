@@ -2,6 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+::selection {
+	background: rgba(185,156,255, 0.4);
+}
+
 i.glide-svg {
   color: #af73ff;
   font-size: 38px;
