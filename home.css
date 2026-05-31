@@ -2,13 +2,13 @@ html {
     scroll-behavior: smooth;
 }
 
-html ::selection {
-    background-color: rgba(185, 156, 255, 0.4);
+::selection {
+    background-color: rgba(138, 149, 255, 0.15);
     color: white;
 }
 
-html ::-moz-selection {
-    background-color: rgba(185, 156, 255, 0.4);
+::-moz-selection {
+    background-color: rgba(138, 149, 255, 0.15);
     color: white;
 }
 
