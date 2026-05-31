@@ -3,7 +3,7 @@ html {
 }
 
 ::selection {
-	background: rgba(185,156,255, 0.4);
+	background: rgba(185,156,255, 0.4) !important;
 }
 
 i.glide-svg {
