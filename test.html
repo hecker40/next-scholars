@@ -12,6 +12,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="home.css">
   </head>
+	<script>
+  const LIGHT = {
+    '--accent-indigo': '#4f46e5',
+    '--accent-purple': '#7c3aed',
+    '--accent-magenta': '#c026d3',
+    '--primary-dark': '#f8f7ff',
+    '--secondary-dark': '#ede9fe',
+  };
+
+  const DARK = {
+    '--accent-indigo': '#6366f1',
+    '--accent-purple': '#9963f1',
+    '--accent-magenta': '#e879f9',
+    '--primary-dark': '#050c1a',
+    '--secondary-dark': '#0d1424',
+  };
+
+  const root = document.documentElement;
+  const body = document.body;
+  let isLight = false;
+
+  function applyTheme(light) {
+    const vars = light ? LIGHT : DARK;
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+
+    if (light) {
+      body.classList.add('light-mode');
+    } else {
+      body.classList.remove('light-mode');
+    }
+
+    // Update toggle icon
+    document.getElementById('theme-icon').className =
+      light ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+
+    // Persist preference
+    localStorage.setItem('ns-theme', light ? 'light' : 'dark');
+  }
+
+  // Load saved preference
+  const saved = localStorage.getItem('ns-theme');
+  if (saved === 'light') { isLight = true; applyTheme(true); }
+
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    isLight = !isLight;
+    applyTheme(isLight);
+  });
+</script>
 <body onload="lucide.createIcons()">
 
     <!-- Floating blobs -->
