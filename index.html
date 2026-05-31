@@ -11,6 +11,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="home.css">
+	<script>
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active state from all links
+        navLinks.forEach(link => {
+          link.classList.remove('text-white', 'font-semibold');
+          link.classList.add('text-gray-300');
+        });
+
+        // Add active state to matching link
+        const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (activeLink) {
+          activeLink.classList.add('text-white', 'font-semibold');
+          activeLink.classList.remove('text-gray-300');
+        }
+      }
+    });
+  }, {
+    rootMargin: '-50% 0px -50% 0px'  // triggers when section hits the middle of the screen
+  });
+
+  sections.forEach(section => observer.observe(section));
+</script>
   </head>
 <body onload="lucide.createIcons()">
 
