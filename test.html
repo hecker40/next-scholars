@@ -12,54 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 	<link rel="stylesheet" href="home.css">
   </head>
-	<script>
-  const LIGHT = {
-    '--accent-indigo': '#4f46e5',
-    '--accent-purple': '#7c3aed',
-    '--accent-magenta': '#c026d3',
-    '--primary-dark': '#f8f7ff',
-    '--secondary-dark': '#ede9fe',
-  };
-
-  const DARK = {
-    '--accent-indigo': '#6366f1',
-    '--accent-purple': '#9963f1',
-    '--accent-magenta': '#e879f9',
-    '--primary-dark': '#050c1a',
-    '--secondary-dark': '#0d1424',
-  };
-
-  const root = document.documentElement;
-  const body = document.body;
-  let isLight = false;
-
-  function applyTheme(light) {
-    const vars = light ? LIGHT : DARK;
-    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
-
-    if (light) {
-      body.classList.add('light-mode');
-    } else {
-      body.classList.remove('light-mode');
-    }
-
-    // Update toggle icon
-    document.getElementById('theme-icon').className =
-      light ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-
-    // Persist preference
-    localStorage.setItem('ns-theme', light ? 'light' : 'dark');
-  }
-
-  // Load saved preference
-  const saved = localStorage.getItem('ns-theme');
-  if (saved === 'light') { isLight = true; applyTheme(true); }
-
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    isLight = !isLight;
-    applyTheme(isLight);
-  });
-</script>
 <style>
 	/* ── LIGHT MODE ── */
 body.light-mode {
@@ -423,6 +375,54 @@ body.light-mode section[style*="rgba(5,12,26"] {
             <p class="text-gray-500 text-xs">© 2025 NextScholar. All Rights Reserved. Nonprofit Initiative.</p>
         </div>
     </footer>
+  <script>
+  const LIGHT = {
+    '--accent-indigo': '#4f46e5',
+    '--accent-purple': '#7c3aed',
+    '--accent-magenta': '#c026d3',
+    '--primary-dark': '#f8f7ff',
+    '--secondary-dark': '#ede9fe',
+  };
+
+  const DARK = {
+    '--accent-indigo': '#6366f1',
+    '--accent-purple': '#9963f1',
+    '--accent-magenta': '#e879f9',
+    '--primary-dark': '#050c1a',
+    '--secondary-dark': '#0d1424',
+  };
+
+  const root = document.documentElement;
+  const body = document.body;
+  let isLight = false;
+
+  function applyTheme(light) {
+    const vars = light ? LIGHT : DARK;
+    Object.entries(vars).forEach(([k, v]) => root.style.setProperty(k, v));
+
+    if (light) {
+      body.classList.add('light-mode');
+    } else {
+      body.classList.remove('light-mode');
+    }
+
+    // Update toggle icon
+    document.getElementById('theme-icon').className =
+      light ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+
+    // Persist preference
+    localStorage.setItem('ns-theme', light ? 'light' : 'dark');
+  }
+
+  // Load saved preference
+  const saved = localStorage.getItem('ns-theme');
+  if (saved === 'light') { isLight = true; applyTheme(true); }
+
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    isLight = !isLight;
+    applyTheme(isLight);
+  });
+</script>
 
   <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5603f53f3d4a48588607f0208f939a4b&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
   <script src="https://nextscholar.org/script.js"></script>
