@@ -3,11 +3,13 @@ html {
 }
 
 ::selection {
-    background-color: rgba(138, 149, 255, 0.2);
+    background-color: rgba(138, 149, 255, 0.25);
+	color: white;
 }
 
 ::-moz-selection {
-    background-color: rgba(138, 149, 255, 0.2);
+    background-color: rgba(138, 149, 255, 0.25);
+	color: white;
 }
 
 i.glide-svg {
