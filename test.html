@@ -61,6 +61,27 @@
   });
 </script>
 <body onload="lucide.createIcons()">
+	<button id="theme-toggle" aria-label="Toggle light/dark mode" style="
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  color: #c4b5fd;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <i id="theme-icon" class="fa-solid fa-sun"></i>
+</button>
 
     <!-- Floating blobs -->
     <div class="bg-float"></div>
