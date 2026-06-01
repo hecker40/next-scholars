@@ -139,3 +139,15 @@ body {
 
 /* section z-index */
 header, section, footer { position: relative; z-index: 10; }
+
+.mobile-nav-link {
+  display: block;
+  padding: 1rem 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #d1d5db;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobile-nav-link:hover { color: #fff; }
