@@ -44,6 +44,37 @@
             </button>
         </div>
     </nav>
+	<!-- Mobile Menu -->
+	<div id="mobile-menu" style="
+	  position: fixed; inset: 0; z-index: 100;
+	  background: rgba(5,12,26,0.98);
+	  backdrop-filter: blur(12px);
+	  display: flex; flex-direction: column;
+	  padding: 2rem 1.5rem;
+	  transform: translateX(100%);
+	  transition: transform 0.3s ease;
+	  overflow-y: auto;
+	  ">
+	  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2.5rem;">
+	    <span class="text-3xl font-extrabold text-white"><span style="color:var(--accent-indigo)">Next</span>Scholar</span>
+	    <button id="mobile-menu-close" style="color:#9ca3af; background:none; border:none; cursor:pointer; font-size:1.5rem;">
+	      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+	    </button>
+	  </div>
+	
+	  <nav style="display:flex; flex-direction:column; gap:0.25rem; flex:1;">
+	    <a href="#mission"    class="mobile-nav-link">Mission</a>
+	    <a href="#programs"   class="mobile-nav-link">Programs</a>
+	    <a href="/tutors"     class="mobile-nav-link">Tutors</a>
+	    <a href="#leadership" class="mobile-nav-link">Leadership</a>
+	    <a href="#enroll"     class="mobile-nav-link">Enrollment</a>
+	  </nav>
+	
+	  <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank"
+	     class="btn-vibrant text-white font-bold text-lg rounded-full text-center py-4 mt-4">
+	    Enroll Now
+	  </a>
+	</div>
 
     <!-- ── HERO ── -->
     <header class="relative z-10 pt-20 text-center px-6">
