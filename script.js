@@ -39,28 +39,17 @@ window.addEventListener('scroll', updateNav, { passive: true });
 updateNav(); // run once on load
   });
 
-const menuBtn    = document.getElementById('mobile-menu-btn');
-const menuClose  = document.getElementById('mobile-menu-close');
+const menuBtn   = document.getElementById('mobile-menu-btn');
+const menuClose = document.getElementById('mobile-menu-close');
 const mobileMenu = document.getElementById('mobile-menu');
 
-function openMenu()  {
-  mobileMenu.style.transform = 'translateX(0)';
-  document.body.style.overflow = 'hidden'; // prevent scroll behind menu
-}
-function closeMenu() {
-  mobileMenu.style.transform = 'translateX(100%)';
-  document.body.style.overflow = '';
-}
+function openMenu()  { mobileMenu.style.transform = 'translateX(0)'; }
+function closeMenu() { mobileMenu.style.transform = 'translateX(100%)'; }
 
 menuBtn.addEventListener('click', openMenu);
 menuClose.addEventListener('click', closeMenu);
 
-// Tap anywhere outside the menu panel to close
-mobileMenu.addEventListener('click', (e) => {
-  if (e.target === mobileMenu) closeMenu();
-});
-
-// Close when any nav link is tapped
+// Close when a link is clicked
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', closeMenu);
 });
