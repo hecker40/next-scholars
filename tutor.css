@@ -18,6 +18,16 @@ margin: 0;
 overflow-x: hidden;
 }
 
+::selection {
+    background-color: rgba(138, 149, 255, 0.25);
+	color: white;
+}
+
+::-moz-selection {
+    background-color: rgba(138, 149, 255, 0.25);
+	color: white;
+}
+
 /* ── Floating blobs (same as homepage) ── */
 .bg-float {
 position: fixed;
