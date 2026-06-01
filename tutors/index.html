@@ -20,27 +20,26 @@
     <div class="bg-float"></div>
     <div class="bg-float"></div>
 
-    <!-- ── NAVBAR ── -->
-    <nav class="sticky top-0 z-50 bg-[#050c1a]/95 backdrop-blur-sm border-b border-gray-800 py-4">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center relative z-10">
-            <a href="/" class="text-3xl font-extrabold text-white">
+   <!-- ── NAVBAR ── -->
+    <nav class="sticky top-0 z-50 backdrop-blur-sm border-b border-gray-800 py-4" style="background:rgba(5,12,26,0.95);">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-extrabold text-white">
                 <span style="color:var(--accent-indigo)">Next</span>Scholar
             </a>
 
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="https://nextscholar.org/#mission" class="hover:text-indigo-400 transition text-gray-300">Mission</a>
-                <a href="https://nextscholar.org/#programs" class="hover:text-indigo-400 transition text-gray-300">Programs</a>
-                <a href="/tutors" class="text-white font-semibold">Tutors</a>
-                <a href="https://nextscholar.org/#leadership" class="hover:text-indigo-400 transition text-gray-300">Leadership</a>
-                <a href="https://nextscholar.org/#enroll" class="hover:text-indigo-400 transition text-gray-300">Enrollment</a>
-                <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank"
-                   class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white">
+            <div class="hidden md:flex space-x-8 items-center text-gray-300">
+                <a href="#mission" class="hover:text-white transition">Mission</a>
+                <a href="#programs" class="hover:text-white transition">Programs</a>
+                <a href="/tutors" class="hover:text-white transition">Tutors</a>
+                <a href="#leadership" class="hover:text-white transition">Leadership</a>
+                <a href="#enroll" class="hover:text-white transition">Enrollment</a>
+                <a href="https://forms.fillout.com/t/iBpbAT4t5Aus" target="_blank" class="px-5 py-2 rounded-full font-semibold btn-vibrant text-white">
                     Enroll Now
                 </a>
             </div>
 
-            <button class="md:hidden text-gray-300">
-                <i data-lucide="menu"></i>
+            <button class="md:hidden text-gray-300" id="mobile-menu-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" aria-hidden="true" class="lucide lucide-menu"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
             </button>
         </div>
     </nav>
@@ -54,7 +53,7 @@
 	  transform: translateX(100%);
 	  transition: transform 0.3s ease;
 	  overflow-y: auto;
-	  ">
+	">
 	  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2.5rem;">
 	    <span class="text-3xl font-extrabold text-white"><span style="color:var(--accent-indigo)">Next</span>Scholar</span>
 	    <button id="mobile-menu-close" style="color:#9ca3af; background:none; border:none; cursor:pointer; font-size:1.5rem;">
