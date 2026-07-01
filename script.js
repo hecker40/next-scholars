@@ -59,3 +59,58 @@ menuClose.addEventListener('click', closeMenu);
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', closeMenu);
 });
+
+
+<script>
+  (function () {
+    const track   = document.getElementById('carousel-track');
+    const dotsEl  = document.getElementById('carousel-dots');
+    const counter = document.getElementById('carousel-counter');
+    const caption = document.getElementById('carousel-caption');
+
+    const captions = [
+      "Library Robotics Workshop · 2026",
+      "Students programming their robots",
+      "Team collaboration in action",
+      "Presenting finished builds to mentors",
+    ];
+
+    const total = document.querySelectorAll('.carousel-slide').length;
+    let current = 0;
+    let autoTimer;
+
+    // Build dots
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.style.cssText = `width:7px;height:7px;border-radius:50%;cursor:pointer;
+        transition:background 0.3s,transform 0.3s;`;
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    }
+
+    function updateDots() {
+      [...dotsEl.children].forEach((d, i) => {
+        d.style.background  = i === current ? '#a78bfa' : 'rgba(255,255,255,0.25)';
+        d.style.transform   = i === current ? 'scale(1.3)' : 'scale(1)';
+      });
+    }
+
+    function goTo(idx) {
+      current = (idx + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      counter.textContent   = `${current + 1} / ${total}`;
+      caption.textContent   = captions[current] || '';
+      updateDots();
+      resetAuto();
+    }
+
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 4500);
+    }
+
+    window.moveCarousel = (dir) => goTo(current + dir);
+
+    goTo(0);
+  })();
+</script>
