@@ -70,8 +70,8 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   const captions = [
     "Library Robotics Workshop · 2026",
     "Students programming their robots",
-    "Team collaboration in action",
-    "Presenting finished builds to mentors",
+    "Kids learning about robotics basics",
+    "Presenting autonomous mode",
   ];
 
   const total = document.querySelectorAll('.carousel-slide').length;
