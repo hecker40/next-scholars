@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-const sections = ['mission', 'programs', 'leadership', 'enroll'];
+const sections = ['mission', 'programs', 'community', 'enroll'];
 const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
 function getActiveSection() {
